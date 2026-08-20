@@ -17,12 +17,21 @@ try(
         "mysql:host=".DB_HOST." ;dbname=" . DB_NAME, 
         DB_USER, 
         DB_PASS,
-        [PDO::ATTR_ERRMODE -> PDO::ERRMODE_EXCEPTION]
+        [PDO::ATTR_ERRMODE -> PDO::ERRMODE_EXCEPTION]   
 );
+
+    $success = logActivity($pdo,$user_id,$email,'connection_db','success');
+
+    if($success){
+        echo "Activity log inserted succesfully";
+    }else{
+        echo "Failed to insert activity log";
+    }
+
     // echo('Connection Successful');
     // echo()
 
-    logActivity($pdo,$user_id,$email,'connection_db','success');
+    //logActivity($pdo,$user_id,$email,'connection_db','success');
 
 
 }catch(PDOException $e){

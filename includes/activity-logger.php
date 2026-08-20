@@ -23,9 +23,19 @@
             activity_log_user_agent,
         ) VALUES (?,?,?,?,?,?)
         ");
+
+        //Execute the INSERT
+        $success = $stmt->execute([
+            $user_id,
+            $user_email,
+            $action,
+            $status,
+            $ip,
+            $user_agent
+        ]);
         
     }catch(PDOException $e){
-        error_log("Activity Log Error:" .$->Message());
+        error_log("Activity Log Error:" .$e->Message());
         return false;
     }
  }

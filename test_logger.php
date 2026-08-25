@@ -1,6 +1,6 @@
 <?php
 require_once ('config/config.php');
-require_once ('includes/activity-logger.php');
+
 
 
 $user_id = "root" ?? null;

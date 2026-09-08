@@ -19,7 +19,7 @@ $button = [
 ?>
 <table border="1" cellpadding="10" cellspacing="5" align="center">
     <tr>
-        <th align="center">Action</th>
+        <th>Action</th>
         <th>Test</th>
         </tr>
         <?php foreach ($button as $button):?>

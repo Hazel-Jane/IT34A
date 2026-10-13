@@ -12,6 +12,9 @@ if(isset($_SESSION['user_id'])){
         'success'
     );
 }
+
+endUserSession($pdo);
+
 $_SESSION = [];
 session_destroy();
 

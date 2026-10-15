@@ -23,7 +23,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         'failed'
        );
     }else {
-       if(loginUser($pdo,$login,$password)){
+
+        $result = loginUser($pdo,$login,$password);
+
+        if($result === true){
+           
         logActivity(
             $pdo,
             $_SESSION['user_id'],
@@ -33,8 +37,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         );
       header('Location: ' . BASE_URL . '/app/' . $_SESSION['user_role'] . '/index.php');
       exit;
-    } 
+
+    } elseif ($result==='active_session'){
+        $error = 'This account is already logged in on another device.';
+    }else {
+        $error = 'Invalid login credentials';
     }
+
+
+ }
 
 }
 ?>

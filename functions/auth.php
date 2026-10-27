@@ -1,10 +1,5 @@
 <?php
 
-function redirect($path){
-    header("Location: " . BASE_URL . $path);
-    exit;
-}
-
 function loginUser($pdo,$login,$password){
     // Application query #2
     $sql = "
@@ -31,11 +26,19 @@ function loginUser($pdo,$login,$password){
         return false;
     }
 
+    // Check if user already has an active session
+    if (hasActiveUserSession($pdo, $user['user_id'])) {
+       return 'active_session';
+    }
+
     // Session variables
     $_SESSION['user_id'] = $user['user_id'];
     $_SESSION['user_email'] = $user['user_email'];
     $_SESSION['user_username'] = $user['user_username'];
     $_SESSION['user_role'] = $user['user_role'];
+
+    // Initialize session in database
+    $_SESSION['session_id'] = startUserSession($pdo);
 
     return true;
 }
@@ -56,6 +59,4 @@ function requireLogin(){
         }
     }
 
-
 ?>
-
